@@ -35,7 +35,7 @@ int OnInit()
 void OnDeinit(const int reason)
   {
 //---
-   
+
   }
 //+------------------------------------------------------------------+
 //| Expert tick function                                             |
@@ -46,11 +46,11 @@ void OnTick()
       double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
       double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
       double balance = 100000;
-      
+
       if((CurrentTradeType == 0) && (ask > tp)){
          ExpertRemove();
       }
-      
+
       if((CurrentTradeType == 1) && (bid < tp)){
          ExpertRemove();
       }
@@ -83,11 +83,11 @@ void OnTick()
       }else{
          temp = bid;
       }
-      
+
       CheckTrailingStop(temp, tp);
 
   }
-  
+
 void CheckTrailingStop(double val, double t_p){
    double sl;
    if(CurrentTradeType == 0){
@@ -95,12 +95,12 @@ void CheckTrailingStop(double val, double t_p){
    }else{
       sl = val + StopLoss * _Point;
    }
-   
+
    string symbol = PositionGetSymbol(0);
    if(_Symbol == symbol){
       ulong PositionTicket = PositionGetInteger(POSITION_TICKET);
       double CurrentStopLoss = PositionGetDouble(POSITION_SL);
-      
+
       if(CurrentTradeType == 0){
          if(CurrentStopLoss < sl){
             trade.PositionModify(PositionTicket, (CurrentStopLoss + _Point), t_p);
